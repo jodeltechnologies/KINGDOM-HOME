@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Our Kingdom Home</title>
+<meta name="theme-color" content="#1C1A1B">
+<meta name="description" content="Family altar, love notes and devotion roster for a kingdom home in Buea.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kingdom Home">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="bgphoto"></div><div id="bgscrim"></div>
+<div id="app">
+
+<!-- ============ HOME ============ -->
+<section class="view on" id="v-home">
+  <header class="mast">
+    <p class="kicker">Buea, Cameroon</p>
+    <h1>Our Kingdom Home</h1>
+    <p class="sub">One home, under God's rule. Built on time given, not time promised.</p>
+  </header>
+
+  <div class="hero">
+    <img id="heroimg" alt="Us, on our day" fetchpriority="high">
+    <div class="veil"></div>
+    <div class="cap">
+      <div class="lbl" id="heroDate"></div>
+      <div class="txt" id="heroLine">Love is as love does.</div>
+    </div>
+  </div>
+
+  <div class="card rose">
+    <h2>Today, do this one thing</h2>
+    <p class="lede" id="actWhy"></p>
+    <p id="actText" style="font-family:var(--ff-d);font-size:19px;line-height:1.34;font-weight:600;margin:0 0 14px"></p>
+    <div class="btnrow grow">
+      <button class="btn rose" id="actDone">I did it</button>
+      <button class="btn ghost" id="actNew">Give me another</button>
+    </div>
+  </div>
+
+  <div class="card ink">
+    <div class="streak">
+      <div><b id="stMsg">0</b><small>days running,<br>a word sent to her</small></div>
+      <div><b id="stDev">0</b><small>days running,<br>family altar kept</small></div>
+      <div><b id="stAct">0</b><small>loving acts<br>logged in all</small></div>
+    </div>
+    <div class="hr" style="background:rgba(245,238,229,.13)"></div>
+    <p class="lede" style="margin:0" id="streakWord"></p>
+  </div>
+
+  <div class="card">
+    <h2>Tonight at the altar</h2>
+    <p class="lede" id="todLead">Set up your roster and this will tell you who leads.</p>
+    <div class="reading" id="todReading" hidden>
+      <div class="rref" id="todRef"></div>
+      <div class="rttl" id="todTtl"></div>
+      <div class="qa" id="todQa"></div>
+    </div>
+    <div class="btnrow grow">
+      <button class="btn leaf" data-go="devo">Open devotion</button>
+      <button class="btn ghost" data-go="roster">See the roster</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Send her a word now</h2>
+    <p class="lede">Short. Human. In your own shorthand. It opens WhatsApp with the message already typed, and you press send.</p>
+    <button class="btn wa full" data-go="write">Write to <span class="wname">her</span></button>
+  </div>
+
+  <p class="sechead">Where to start when it feels far gone</p>
+  <div class="card">
+    <p class="lede" style="margin-bottom:11px">She has told you what is missing: your time, your talk, your warmth, and the training of the children. That is not a mystery to solve. It is a list to obey.</p>
+    <p style="font-size:14.4px;margin-bottom:11px">Do not start by explaining yourself. Start by asking her one question and then keeping quiet long enough to hear the whole answer:</p>
+    <p class="verse">"I have not given you my time and I know it. I am not here to defend myself. Tell me what the last months have felt like for you, and I will just listen."<cite>Say it once. Then listen without interrupting, for as long as she needs.</cite></p>
+    <p style="font-size:14.4px;margin:0">Then pick one thing from her answer and change it this week. One. Changed things convince; promises do not.</p>
+  </div>
+</section>
+
+<!-- ============ FIVE LOVES ============ -->
+<section class="view" id="v-love">
+  <header class="mast">
+    <p class="kicker">The husband's assignment</p>
+    <h1>Five ways love shows up</h1>
+    <p class="sub">Love in Scripture is a verb before it is a feeling. These are the five doors love walks through. Find the one she opens fastest.</p>
+  </header>
+
+  <div class="card">
+    <h2>Before the five</h2>
+    <p class="lede" style="margin-bottom:10px">Ephesians 5:25 does not ask you to feel something. It asks you to give something up.</p>
+    <p class="verse">Husbands, love your wives, even as Christ also loved the church, and gave himself for it.<cite>Ephesians 5:25, KJV</cite></p>
+    <p style="font-size:14.4px;margin:0">Christ's love cost Him His schedule, His comfort and His body. So the test of whether you love your wife is not what you feel at 6am. It is what you gave up by 9pm.</p>
+  </div>
+
+  <div class="card" id="loveList"></div>
+
+  <div class="card ink">
+    <h2>Which one is hers?</h2>
+    <p class="lede">You are probably loving her the way <em>you</em> receive love. That is why it is not landing. Ask her these three questions and let her answer freely.</p>
+    <ol style="font-size:14.4px;padding-left:19px;margin:0 0 14px">
+      <li style="margin-bottom:7px">What did I do in our first year that made you feel most loved?</li>
+      <li style="margin-bottom:7px">When you feel far from me, what would bring you back fastest?</li>
+      <li>What do you keep asking me for that I keep not hearing?</li>
+    </ol>
+    <p class="note" style="margin-bottom:0"><b>Note.</b> Her answer to question three is almost always her primary love language. Write it down. Then act on it before the week ends.</p>
+  </div>
+
+  <div class="card">
+    <h2>The seven-day rebuild</h2>
+    <p class="lede">You said you do not know how to please her. Here is a week that costs no money and cannot fail if you actually do it.</p>
+    <div id="sevenDay"></div>
+  </div>
+</section>
+
+<!-- ============ WRITE ============ -->
+<section class="view" id="v-write">
+  <header class="mast">
+    <p class="kicker">No app to app, no robot voice</p>
+    <h1>Write to her</h1>
+    <p class="sub">Pick a mood, take the line, then change a word or two so it sounds like your mouth. Sends straight into WhatsApp.</p>
+  </header>
+
+  <div class="card tight" id="setupCard">
+    <div class="grid2">
+      <div class="fld"><label class="f" for="wName">Her name</label><input type="text" id="wName" placeholder="e.g. Ngwe" autocomplete="off"></div>
+      <div class="fld"><label class="f" for="wPhone">Her WhatsApp number</label><input type="tel" id="wPhone" placeholder="237 6XX XX XX XX" autocomplete="off"></div>
+    </div>
+    <p class="note" style="margin:0"><b>Number format.</b> Include the country code without the plus sign. A Cameroon number looks like <b>2376XXXXXXXX</b>. Saved on this phone only.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:9px">Mood</h3>
+    <div class="chips" id="moodChips"></div>
+    <h3 style="margin:14px 0 9px">Voice</h3>
+    <div class="chips" id="toneChips">
+      <button class="chip rose" data-tone="sh" aria-pressed="true">Shorthand</button>
+      <button class="chip rose" data-tone="pd" aria-pressed="false">Pidgin</button>
+    </div>
+
+    <div class="msgbox">
+      <textarea id="msgText" rows="3" aria-label="Your message"></textarea>
+      <div class="msgmeta">
+        <span id="charCount">0 characters</span>
+        <button class="btn ghost sm" id="shuffle">Another line</button>
+      </div>
+    </div>
+
+    <div class="btnrow grow">
+      <button class="btn wa" id="sendWa">Open WhatsApp</button>
+      <button class="btn ghost" id="copyMsg">Copy</button>
+    </div>
+    <p class="note" style="margin-bottom:0"><b>Change one word.</b> A line you edited beats a line you took whole. Add her name, or the thing that happened today, and it stops sounding like a card and starts sounding like you.</p>
+  </div>
+
+
+  <div class="card" id="groqCard">
+    <h2>Write one from scratch</h2>
+    <p class="lede">Give it what actually happened today and it will turn that into a line in your voice. Specific beats poetic. If this is not set up, the lines above still work on their own.</p>
+    <div class="fld">
+      <label class="f" for="gCtx">What happened, or what you want to say</label>
+      <input type="text" id="gCtx" placeholder="e.g. she stayed up with the baby, i got home late again" autocomplete="off">
+    </div>
+    <div class="btnrow grow">
+      <button class="btn rose" id="gWrite">Write three lines</button>
+      <button class="btn ghost" id="gSetup" data-go="more">Set up the key</button>
+    </div>
+    <div id="gOut" style="margin-top:12px"></div>
+    <p class="note" style="margin-bottom:0"><b>Read it before you send it.</b> If a line does not sound like your mouth, change it or throw it away. She knows how you talk, and a sentence that is too smooth will land worse than one that is plain.</p>
+  </div>
+
+  <div class="card">
+    <h2>What you sent</h2>
+    <p class="lede" id="sentLede">Nothing logged yet. Sending one line a day for two weeks changes the temperature of a house.</p>
+    <div id="sentList"></div>
+  </div>
+</section>
+
+<!-- ============ DEVOTION ============ -->
+<section class="view" id="v-devo">
+  <header class="mast">
+    <p class="kicker">Family altar</p>
+    <h1>The table</h1>
+    <p class="sub">Pick any day, back or forward. Open the church's devotionals, then keep your own record of what your family actually did.</p>
+  </header>
+
+  <div class="card">
+    <div class="dev-nav">
+      <button class="arw" id="dPrev" aria-label="Previous day">&#8249;</button>
+      <input type="date" id="dDate" aria-label="Choose a date">
+      <button class="arw" id="dNext" aria-label="Next day">&#8250;</button>
+    </div>
+    <div class="btnrow"><button class="btn ghost sm full" id="dToday">Back to today</button></div>
+  </div>
+
+  <div class="card">
+    <h2>Deeper Life devotionals</h2>
+    <p class="lede" id="dmLede"></p>
+    <div class="btnrow grow">
+      <a class="btn rose" id="dmAdult" href="https://www.dailymanna.app/" target="_blank" rel="noopener">Daily Manna, for us</a>
+      <a class="btn leaf" id="dmKids" href="https://www.dailymanna.app/" target="_blank" rel="noopener">Sincere Milk, for the children</a>
+    </div>
+    <p class="note"><b>Why these open outward.</b> <em>Daily Manna</em> and <em>Sincere Milk</em> are written and owned by Deeper Christian Life Ministry. This app will not hold copies of three months of their text, and it should not. The buttons take you to the ministry's own site, where the day's reading is published for free, and you read it there. Everything below is your family's own record, and it stays on this phone.</p>
+  </div>
+
+  <div class="card">
+    <h2 id="planTitle">Your family reading</h2>
+    <p class="lede" id="planLede"></p>
+    <div class="reading">
+      <div class="rref" id="pRef"></div>
+      <div class="rttl" id="pTtl"></div>
+      <div class="qa" id="pQa"></div>
+    </div>
+    <p style="font-size:13.6px;color:var(--ink-soft);margin:0">Leading tonight: <b id="pWho" style="color:var(--ink)">not set</b></p>
+  </div>
+
+  <div class="card">
+    <h2>What happened at the table</h2>
+    <p class="lede">Two lines is enough. In a year this becomes the record your children read back.</p>
+    <div class="fld">
+      <label class="f" for="dNotes">Notes, prayer points, what a child said</label>
+      <textarea id="dNotes" placeholder="Junior asked why God let Joseph stay in prison so long. We prayed for Mami's shop."></textarea>
+    </div>
+    <div class="btnrow grow">
+      <button class="btn leaf" id="dHeld">We held the altar</button>
+      <button class="btn ghost" id="dSave">Save notes</button>
+    </div>
+    <p style="font-size:12.7px;color:var(--ink-soft);margin:11px 0 0" id="dStatus"></p>
+  </div>
+
+  <div class="card ink">
+    <h2>How to run twenty minutes</h2>
+    <p class="lede" style="margin-bottom:12px">Tony Evans calls it table time. Short, warm, every day, at the same hour. Long and holy once a week will not form a child. Short and steady will.</p>
+    <div id="tableTime"></div>
+  </div>
+</section>
+
+<!-- ============ ROSTER ============ -->
+<section class="view" id="v-roster">
+  <header class="mast">
+    <p class="kicker">Who leads, and what we read</p>
+    <h1>The roster</h1>
+    <p class="sub">Take turns. When it is written down, nobody has to decide at 8pm, and nobody carries it alone.</p>
+  </header>
+
+  <div class="card">
+    <div class="grid2">
+      <div class="fld"><label class="f" for="rHus">Your name</label><input type="text" id="rHus" placeholder="e.g. Ekema"></div>
+      <div class="fld"><label class="f" for="rWif">Her name</label><input type="text" id="rWif" placeholder="e.g. Ngwe"></div>
+    </div>
+    <div class="fld">
+      <label class="f" for="rTrack">What we walk through</label>
+      <select id="rTrack">
+        <option value="canon">Through the Bible</option>
+        <option value="char">A Bible person a day</option>
+        <option value="event">A Bible event a day</option>
+      </select>
+    </div>
+    <div class="grid2">
+      <div class="fld"><label class="f" for="rStart">Starting</label><input type="date" id="rStart"></div>
+      <div class="fld"><label class="f" for="rWeeks">For how long</label>
+        <select id="rWeeks"><option value="4">4 weeks</option><option value="8">8 weeks</option><option value="13" selected>13 weeks</option><option value="26">26 weeks</option></select>
+      </div>
+    </div>
+    <div class="fld">
+      <label class="f" for="rTurn">How we take turns</label>
+      <select id="rTurn">
+        <option value="1">Swap every day</option>
+        <option value="7" selected>Swap every week</option>
+        <option value="sun">Daily, together on Sunday</option>
+      </select>
+    </div>
+    <button class="btn rose full" id="rGen">Build the roster</button>
+  </div>
+
+  <div class="card" id="rOut" hidden>
+    <h2 id="rTitle">Devotion roster</h2>
+    <p class="lede" id="rSub"></p>
+    <div class="btnrow grow noprint" style="margin-bottom:14px">
+      <button class="btn ghost sm" id="rPdf">Save as PDF</button>
+      <button class="btn ghost sm" id="rDocx">Download Word file</button>
+    </div>
+    <div class="scroller"><table class="rtable" id="rTable"></table></div>
+  </div>
+
+  <div class="card ink">
+    <h2>Let her lead half of it</h2>
+    <p class="lede" style="margin-bottom:0">You wrote that there is no time to train the children in the way of the Lord. A roster fixes half of that, because it removes the excuse of forgetting. But it does something else too. When your wife leads Thursday and the children listen to her the way they listen to you, she stops feeling like staff in her own home. Headship in Scripture means you carry responsibility for the altar being kept, not that your voice is the only one heard at it.</p>
+  </div>
+</section>
+
+<!-- ============ MORE ============ -->
+<section class="view" id="v-more">
+  <header class="mast">
+    <p class="kicker">Reminders, house, church</p>
+    <h1>Set up</h1>
+  </header>
+
+
+  <div class="card">
+    <h2>Groq, for writing lines</h2>
+    <p class="lede">Two ways to connect. Pick the one that matches how you deployed this.</p>
+    <div class="chips" id="gModeChips">
+      <button class="chip rose" data-gmode="server" aria-pressed="true">Through my Vercel site</button>
+      <button class="chip rose" data-gmode="browser" aria-pressed="false">Key on this phone</button>
+    </div>
+
+    <div id="gServerBox">
+      <p class="note"><b>The safe one.</b> Put <b>GROQ_API_KEY</b> in your Vercel project under Settings, Environment Variables, then redeploy. The key stays on the server and never reaches the phone. Nothing to type here.</p>
+      <div class="fld"><label class="f" for="gEndpoint">Endpoint path</label><input type="text" id="gEndpoint" placeholder="/api/write"></div>
+    </div>
+
+    <div id="gBrowserBox" hidden>
+      <div class="fld"><label class="f" for="gKey">Groq API key</label><input type="text" id="gKey" placeholder="gsk_..." autocomplete="off" spellcheck="false"></div>
+      <p class="note" style="border-left-color:var(--rose-deep)"><b>Careful.</b> A key typed here is stored in this browser and sent straight from this phone. That is fine on your own phone. Never put it in the code you push to GitHub, and never use this mode on a shared computer. Set a spend limit on your Groq account either way.</p>
+    </div>
+
+    <div class="fld"><label class="f" for="gModel">Model</label>
+      <select id="gModel">
+        <option value="openai/gpt-oss-120b">gpt-oss-120b, better lines</option>
+        <option value="openai/gpt-oss-20b">gpt-oss-20b, faster and cheaper</option>
+      </select>
+    </div>
+    <div class="btnrow grow">
+      <button class="btn ghost sm" id="gLoadModels">Load models from my account</button>
+      <button class="btn ghost sm" id="gTest">Test the connection</button>
+    </div>
+    <p style="font-size:12.6px;color:var(--ink-soft);margin:10px 0 0" id="gState"></p>
+  </div>
+
+  <div class="card">
+    <h2>Supabase, to share with her</h2>
+    <p class="lede">Optional. Turn this on and both your phones see the same roster, altar record and notes. Without it everything still works, it just lives on one phone.</p>
+    <div class="fld"><label class="f" for="sbUrl">Project URL</label><input type="text" id="sbUrl" placeholder="https://xxxxxxxx.supabase.co" autocomplete="off" spellcheck="false"></div>
+    <div class="fld"><label class="f" for="sbKey">Anon public key</label><input type="text" id="sbKey" placeholder="eyJ..." autocomplete="off" spellcheck="false"></div>
+    <div class="fld"><label class="f" for="sbCode">Household code</label>
+      <div style="display:flex;gap:8px"><input type="text" id="sbCode" placeholder="a long secret you both use" autocomplete="off" spellcheck="false">
+      <button class="btn ghost sm" id="sbGen" style="flex:0 0 auto;white-space:nowrap">Make one</button></div>
+    </div>
+    <div class="btnrow grow">
+      <button class="btn leaf" id="sbPush">Send this phone up</button>
+      <button class="btn ghost" id="sbPull">Pull hers down</button>
+    </div>
+    <p style="font-size:12.6px;color:var(--ink-soft);margin:10px 0 0" id="sbState"></p>
+    <p class="note" style="margin-bottom:0"><b>How the code works.</b> Anyone holding the household code can read and write your family's notes, so treat it like a house key. Type the same one on her phone and the two stay in step. Run <b>supabase/schema.sql</b> in the Supabase SQL editor once before this will work.</p>
+  </div>
+
+  <div class="card">
+    <h2>Nudges</h2>
+    <p class="lede">While this app is open on your phone, it will buzz you at these times. For alarms that fire when the app is closed, use the calendar file below.</p>
+    <div id="remList"></div>
+    <div class="hr"></div>
+    <button class="btn ghost sm full" id="notifAsk">Allow notifications on this phone</button>
+    <p style="font-size:12.6px;color:var(--ink-soft);margin:9px 0 0" id="notifState"></p>
+  </div>
+
+  <div class="card">
+    <h2>Alarms that work when the app is shut</h2>
+    <p class="lede">This downloads a calendar file with your daily nudges in it. Open it and Android adds them to Google Calendar, which will ring you whether this app is open or not. This is the reliable way.</p>
+    <button class="btn leaf full" id="icsBtn">Download the calendar file</button>
+  </div>
+
+  <div class="card">
+    <h2>Put it on your home screen</h2>
+    <p class="lede">Android, in Chrome:</p>
+    <ol style="font-size:14.2px;padding-left:19px;margin:0 0 12px">
+      <li style="margin-bottom:6px">Open the three dots at the top right.</li>
+      <li style="margin-bottom:6px">Tap <b>Add to Home screen</b>, or <b>Install app</b> if it offers that.</li>
+      <li>Name it Kingdom Home and tap Add. It will sit with your other apps and open full screen.</li>
+    </ol>
+    <p class="note" style="margin-bottom:0"><b>If Install does not appear.</b> That happens when the file is opened straight from Downloads. Put this one file on any free web host, open the link in Chrome, and the full install option appears. <b>Add to Home screen</b> works either way and is enough for daily use.</p>
+  </div>
+
+  <div class="card">
+    <h2>Raising kingdom kids</h2>
+    <p class="lede">Tony Evans' frame, in the order he builds it. These are the ideas, in short. The book itself is worth reading slowly with your wife, a chapter a week.</p>
+    <div id="tonyList"></div>
+  </div>
+
+  <div class="card">
+    <h2>Deeper Christian Life Ministry</h2>
+    <p class="lede">Founded in 1973 by Pastor W.F. Kumuyi, then a mathematics lecturer at the University of Lagos, out of a fifteen-person Bible study in his flat. A holiness-Pentecostal church, with branches across Cameroon and around sixty other countries. The motto: your spiritual welfare is our concern.</p>
+    <h3 style="font-size:15px;margin-bottom:6px">The twenty-two tenets held by the church</h3>
+    <div class="tenets" id="tenetList"></div>
+    <p class="note"><b>Why it matters for your marriage.</b> Marriage is one of the twenty-two. In this church it is taught as lifelong and honourable, a picture of Christ and the church, and the home is expected to keep a family altar. So the neglect your wife has named is not a private disappointment. It is a doctrinal matter for you, and your church already has the framework to help you carry it.</p>
+    <h3 style="font-size:15px;margin:14px 0 6px">The weekly rhythm</h3>
+    <div id="rhythmList"></div>
+    <p class="note" style="margin-bottom:0"><b>Ask for help.</b> Every Deeper Life assembly has married elders and a pastor who counsel couples, and this is exactly the kind of thing they are there for. Going to them early is not failure. Going late is what makes it hard.</p>
+  </div>
+
+  <div class="card">
+    <h2>This phone's memory</h2>
+    <p class="lede">Everything you type here, your names, her number, notes, roster and streaks, is stored in this browser on this phone. Nothing is sent anywhere. Clearing your browser data clears this too, so export first if you care about the notes.</p>
+    <div class="btnrow grow">
+      <button class="btn ghost sm" id="expBtn">Export everything</button>
+      <button class="btn ghost sm" id="wipeBtn">Erase everything</button>
+    </div>
+  </div>
+
+  <div class="card ink">
+    <h2>One honest word</h2>
+    <p class="lede" style="margin-bottom:11px">An app cannot repair a marriage. It can only make it harder to forget, and easier to start. The repair itself will happen in unglamorous places: an evening you did not spend on your phone, an apology with no <em>but</em> in it, a Tuesday you came home when you said you would.</p>
+    <p class="lede" style="margin-bottom:0">Your wife does not need you to become a different man. She needs the man she married to turn up. Start tonight, and let her see it for a month before you ask her to believe it.</p>
+  </div>
+</section>
+
+</div>
+
+<nav>
+  <div class="inner">
+    <button data-view="home" aria-current="page"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21H3z"/><path d="M9.5 21v-6h5v6"/></svg>Home</button>
+    <button data-view="love"><svg viewBox="0 0 24 24"><path d="M12 20.5S3.5 15 3.5 8.9A4.4 4.4 0 0 1 12 6.8a4.4 4.4 0 0 1 8.5 2.1c0 6.1-8.5 11.6-8.5 11.6z"/></svg>Love</button>
+    <button data-view="write"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-11.9 7.6L3 21l1.9-6.1A8.4 8.4 0 1 1 21 11.5z"/></svg>Write</button>
+    <button data-view="devo"><svg viewBox="0 0 24 24"><path d="M3 4.5h6a3 3 0 0 1 3 3V20a2.4 2.4 0 0 0-2.4-2.2H3z"/><path d="M21 4.5h-6a3 3 0 0 0-3 3V20a2.4 2.4 0 0 1 2.4-2.2H21z"/></svg>Altar</button>
+    <button data-view="roster"><svg viewBox="0 0 24 24"><rect x="3" y="4.8" width="18" height="16" rx="2.2"/><path d="M3 9.6h18M8.2 3v3.4M15.8 3v3.4"/></svg>Roster</button>
+    <button data-view="more"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 14.6a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.2a2 2 0 0 1-4 0v-.1a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7h-.2a2 2 0 0 1 0-4h.1a1.6 1.6 0 0 0 1.1-2.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 2.7-1.1v-.2a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7h.2a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1.1z"/></svg>Set up</button>
+  </div>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./data.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
