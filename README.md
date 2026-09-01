@@ -76,7 +76,40 @@ start sharing the URL. For a private URL that only you and your wife know, leave
 
 ---
 
-## 3. Supabase, optional
+## 3. Keeping two phones in step
+
+Two ways. Read this before choosing.
+
+### The file (recommended)
+
+**Set up, Share with her, Save our file.** It downloads a small JSON file. Send it to her on
+WhatsApp. She opens the app, taps **Open one she sent**, picks the file. Done.
+
+It **merges**, it does not overwrite. If you both wrote altar notes on the same evening you keep
+both, stacked. Practices keep whichever of you started them first. Sent messages and logged acts
+are unioned with duplicates removed. Names and name-card wording are only filled in where the
+receiving phone is blank, so her wording is never wiped by yours.
+
+Nothing to sign up for, nothing to keep awake, and your family's notes never leave the two phones.
+Do it on a Sunday and that is enough.
+
+### Supabase, and the pause you should know about
+
+Supabase pauses Free plan projects after 7 days of low activity. Their own guidance is that
+"a few user requests to the database each day" is what keeps a project out of the pause list, so a
+household of two doing a weekly sync is exactly the profile that gets paused. When it pauses, sync
+silently stops until someone presses **Resume** in the dashboard. Data survives, and you have a
+year to restore it.
+
+`.github/workflows/keepalive.yml` prevents this by calling `kh_pull` once a day. Add three
+repository secrets under **Settings, Secrets and variables, Actions**: `SUPABASE_URL`,
+`SUPABASE_KEY` and `HOUSEHOLD_CODE`. Run it once by hand from the Actions tab to check it goes
+green. One caveat: GitHub disables scheduled workflows after 60 days with no repository activity.
+It emails you first and re-enabling is one button.
+
+Vercel does not pause hobby projects, so the app itself stays up regardless.
+
+## 3b. Supabase, optional
 
 Only needed if you want both phones showing the same roster, altar record and notes. Skip it and
 everything still works, it just lives on one phone.

@@ -1,6 +1,6 @@
 /* Kingdom Home service worker.
    Bump CACHE when you change any file, or phones will keep the old copy. */
-const CACHE = "kingdom-home-v3";
+const CACHE = "kingdom-home-v4";
 const SHELL = [
   './', './index.html', './styles.css', './data.js', './practices.js', './app.js', './steps.js',
   './manifest.webmanifest',

@@ -494,8 +494,25 @@ $('#rhythmList').innerHTML=RHYTHM.map(r=>
  '<b style="flex:0 0 62px;font-family:var(--ff-d)">'+r[0]+'</b><span style="color:var(--ink-soft)">'+r[1]+'</span></div>').join('');
 
 $('#expBtn').onclick=()=>{
-  dl(new Blob([JSON.stringify(Store.all(),null,2)],{type:'application/json'}),'kingdom-home-backup.json');
-  toast('Backup downloaded.');
+  const out={_app:'kingdom-home', _at:new Date().toISOString()};
+  SYNCED.forEach(k=>{ const v=Store.get(k,null); if(v!==null) out[k]=v; });
+  const who=(nameOr(S.husName,'')||'phone').toLowerCase().replace(/[^a-z0-9]/g,'')||'phone';
+  dl(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}), 'kingdom-home-'+who+'-'+iso(today())+'.json');
+  toast('Saved. Send it to her on WhatsApp.');
+};
+$('#impBtn').onclick=()=>$('#impFile').click();
+$('#impFile').onchange=async e=>{
+  const f=e.target.files&&e.target.files[0]; if(!f) return;
+  const st=$('#impState');
+  try{
+    const d=JSON.parse(await f.text());
+    const r=mergeIn(d);
+    st.textContent='Merged'+(r.touched.length?': '+r.touched.join(', '):'')+
+      (r.addedNotes?'. '+r.addedNotes+' of her altar notes were added under yours':'')+'. Reloading.';
+    toast('Merged, nothing overwritten.');
+    setTimeout(()=>location.reload(),1200);
+  }catch(err){ st.textContent='Could not read that file: '+err.message; }
+  e.target.value='';
 };
 $('#wipeBtn').onclick=()=>{
   if(!confirm('Erase names, number, notes, roster and streaks from this phone? This cannot be undone.')) return;
@@ -707,6 +724,69 @@ async function rpc(fn, args){
   if(!r.ok) throw new Error((j&&(j.message||j.hint))||t.slice(0,140)||('Supabase returned '+r.status));
   return j;
 }
+/* Merging two phones properly. Last-write-wins loses notes, so nothing here
+   overwrites content with emptiness. Both of you can add on the same day. */
+function mergeIn(d){
+  if(!d || typeof d!=='object') throw new Error('That file is not a Kingdom Home backup.');
+  const parse = v => typeof v==='string' ? (()=>{try{return JSON.parse(v)}catch(e){return v}})() : v;
+  const get = k => parse(d[k]);
+  let touched=[];
+
+  // names, number, family profile: take theirs only where this phone is blank
+  ['wifeName','husName','phone'].forEach(k=>{
+    const v=get(k); if(v && !Store.get(k,'')) { Store.set(k,v); touched.push(k); }
+  });
+  const fam=get('fam');
+  if(fam && fam.kids){
+    const mine=Store.get('fam',null);
+    if(!mine || !mine.kids.some(k=>k.n)) { Store.set('fam',fam); touched.push('family'); }
+    else { // fill in only the blanks, so her name-card wording is not wiped
+      fam.kids.forEach((k,i)=>{ if(mine.kids[i]){ ['n','mean','verse'].forEach(f=>{ if(!mine.kids[i][f] && k[f]) mine.kids[i][f]=k[f]; }); }});
+      Store.set('fam',mine); touched.push('family');
+    }
+  }
+
+  // altar: merge by date. Keep held if either held. Keep the longer note.
+  const inAlt=get('altar')||{}, myAlt=Store.get('altar',{});
+  let addedNotes=0;
+  Object.keys(inAlt).forEach(day=>{
+    const a=inAlt[day]||{}, b=myAlt[day]||{};
+    const held = a.held || b.held;
+    let notes = b.notes||'';
+    if(a.notes && a.notes!==notes){
+      notes = notes ? (notes.trim()+'\n'+a.notes.trim()) : a.notes;   // keep both
+      addedNotes++;
+    }
+    myAlt[day]={held, notes};
+  });
+  Store.set('altar',myAlt); if(Object.keys(inAlt).length) touched.push('altar record');
+
+  // practices started: keep the earliest date either of you marked
+  const inDone=get('done')||{}, myDone=Store.get('done',{});
+  Object.keys(inDone).forEach(id=>{
+    if(!myDone[id] || inDone[id]<myDone[id]) myDone[id]=inDone[id];
+  });
+  Store.set('done',myDone); if(Object.keys(inDone).length) touched.push('practices');
+
+  // acts and sent messages: union, no duplicates
+  const acts=[...new Set([...(Store.get('acts',[])), ...((get('acts'))||[])])];
+  Store.set('acts',acts);
+  const seen=new Set(), sent=[...(Store.get('sent',[])), ...((get('sent'))||[])]
+    .filter(s=>{ const k=(s.ts||'')+'|'+s.t; if(seen.has(k)) return false; seen.add(k); return true; })
+    .sort((a,b)=>(b.ts||0)-(a.ts||0)).slice(0,60);
+  Store.set('sent',sent);
+
+  // the box: take whichever phone has more entries logged
+  const inBox=get('box');
+  if(inBox && (inBox.log||[]).length > (Store.get('box',{log:[]}).log||[]).length){ Store.set('box',inBox); touched.push('the box'); }
+
+  // roster and reminders: take theirs if this phone has none
+  const ros=get('roster'); if(ros && !Store.get('roster',null)){ Store.set('roster',ros); touched.push('roster'); }
+  const rem=get('rems');   if(rem && !Store.get('rems',null))  { Store.set('rems',rem); }
+
+  return {touched:[...new Set(touched)], addedNotes};
+}
+
 // What travels between the two phones. Deliberately excluded: the Groq key,
 // the Supabase connection details themselves, and per-phone preferences like
 // which mood chip you last tapped.
@@ -730,9 +810,9 @@ $('#sbPull').onclick=async()=>{
   try{
     const d=await rpc('kh_pull',{p_code:SB.code});
     if(!d || !Object.keys(d).length){ st.textContent='Nothing stored under that code yet. Send this phone up first.'; return; }
-    if(!confirm('This replaces the names, notes, roster and streaks on this phone with what is stored under the household code. Continue?')) { st.textContent='Cancelled.'; return; }
-    SYNCED.forEach(k=>{ if(d[k]!==undefined && d[k]!==null) Store.set(k,d[k]); });
-    st.textContent='Pulled. Reloading.'; setTimeout(()=>location.reload(),700);
+    const r=mergeIn(d);
+    st.textContent='Merged'+(r.touched.length?': '+r.touched.join(', '):'')+'. Reloading.';
+    setTimeout(()=>location.reload(),900);
   }catch(e){ st.textContent='Failed: '+e.message; }
 };
 

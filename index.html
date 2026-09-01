@@ -419,9 +419,22 @@
     <p style="font-size:12.6px;color:var(--ink-soft);margin:10px 0 0" id="gState"></p>
   </div>
 
+
+  <div class="card">
+    <h2>Share with her, without a server</h2>
+    <p class="lede">The simplest way to keep both phones in step. Save a file here, send it to her on WhatsApp, she opens it under this same button. It merges rather than overwrites, so if you both wrote altar notes on the same day, you keep both.</p>
+    <div class="btnrow grow">
+      <button class="btn leaf" id="expBtn">Save our file</button>
+      <button class="btn ghost" id="impBtn">Open one she sent</button>
+    </div>
+    <input type="file" id="impFile" accept=".json,application/json" hidden>
+    <p style="font-size:12.6px;color:var(--ink-soft);margin:10px 0 0" id="impState"></p>
+    <p class="note" style="margin-bottom:0"><b>Why this over Supabase.</b> Nothing to sign up for, nothing to keep awake, and your family&rsquo;s notes never leave the two phones. Do it once a week, on a Sunday, and you are as in step as you need to be.</p>
+  </div>
+
   <div class="card">
     <h2>Supabase, to share with her</h2>
-    <p class="lede">Optional. Turn this on and both your phones see the same roster, altar record and notes. Without it everything still works, it just lives on one phone.</p>
+    <p class="note" style="border-left-color:var(--rose-deep);margin-top:0"><b>Read this first.</b> Supabase pauses free projects after seven days of low activity, and their own guidance is that it takes a few requests a day to stay out of the pause list. If you go two quiet weeks the sync stops working until you press Resume in their dashboard. The repo ships a GitHub Action that pings it daily to prevent this. If you would rather not manage that, use the file above instead. It does the same job with nothing to keep alive.</p><p class="lede">Optional. Both phones see the same roster, altar record and notes, automatically. Without it everything still works.</p>
     <div class="fld"><label class="f" for="sbUrl">Project URL</label><input type="text" id="sbUrl" placeholder="https://xxxxxxxx.supabase.co" autocomplete="off" spellcheck="false"></div>
     <div class="fld"><label class="f" for="sbKey">Anon public key</label><input type="text" id="sbKey" placeholder="eyJ..." autocomplete="off" spellcheck="false"></div>
     <div class="fld"><label class="f" for="sbCode">Household code</label>
@@ -481,11 +494,8 @@
 
   <div class="card">
     <h2>This phone's memory</h2>
-    <p class="lede">Everything you type here, your names, her number, notes, roster and streaks, is stored in this browser on this phone. Nothing is sent anywhere. Clearing your browser data clears this too, so export first if you care about the notes.</p>
-    <div class="btnrow grow">
-      <button class="btn ghost sm" id="expBtn">Export everything</button>
-      <button class="btn ghost sm" id="wipeBtn">Erase everything</button>
-    </div>
+    <p class="lede">Everything you type here, your names, her number, notes, roster and streaks, is stored in this browser on this phone. Nothing is sent anywhere unless you press one of the buttons above. Clearing your browser data clears this too, so save the file first if you care about the notes.</p>
+    <div class="btnrow"><button class="btn ghost sm" id="wipeBtn">Erase everything on this phone</button></div>
   </div>
 
   <div class="card ink">
