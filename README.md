@@ -94,6 +94,20 @@ generator makes it eighteen random characters. Treat it like a house key.
 The schema locks the table completely and exposes only two functions, `kh_push` and `kh_pull`,
 both of which demand the code. There is no way to list households or enumerate codes.
 
+### What is actually sent
+
+One JSON object, roughly 15 KB, defined by `SYNCED` in `app.js`. It contains: both your names and
+her number; the family profile (ages, children's names, name-card meanings and verses); the
+roster; the altar record including every note you have typed; acts logged; the messages you have
+sent her; which practices you have started; the give/save/spend box; and your reminder times.
+
+Deliberately excluded: the Groq API key, the Supabase connection details themselves, and per-phone
+preferences such as the last mood chip you tapped. If you want to see the exact payload before
+trusting it, open **Set up, Export everything** — the file it downloads is the same shape.
+
+Note that **Pull hers down** replaces this phone's data rather than merging it. Last writer wins.
+Agree with your wife who pushes and who pulls, or you will overwrite each other's notes.
+
 ---
 
 ## 4. Groq, the message writer

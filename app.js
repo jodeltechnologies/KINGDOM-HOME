@@ -707,7 +707,16 @@ async function rpc(fn, args){
   if(!r.ok) throw new Error((j&&(j.message||j.hint))||t.slice(0,140)||('Supabase returned '+r.status));
   return j;
 }
-const SYNCED=['wifeName','husName','phone','sent','altar','acts','roster','rems'];
+// What travels between the two phones. Deliberately excluded: the Groq key,
+// the Supabase connection details themselves, and per-phone preferences like
+// which mood chip you last tapped.
+const SYNCED=[
+  'wifeName','husName','phone',   // who you are
+  'fam',                          // ages, children's names, name-card meanings and verses
+  'roster','altar','acts','sent', // the roster, the altar record and notes, acts, messages sent
+  'done','box',                   // practices started, the give/save/spend box
+  'rems'                          // reminder times
+];
 $('#sbPush').onclick=async()=>{
   const st=$('#sbState'); st.textContent='Sending...';
   try{ const payload={}; SYNCED.forEach(k=>payload[k]=Store.get(k,null));
