@@ -221,9 +221,9 @@ nav{position:fixed; left:0; right:0; bottom:0; z-index:80;
   border-top:1px solid rgba(245,238,229,.1); padding-bottom:var(--safe-b)}
 nav .inner{max-width:600px; margin:0 auto; display:flex; height:var(--nav-h)}
 nav button{flex:1; background:none; border:none; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:3px; color:rgba(245,238,229,.44); font-size:10.2px; font-weight:600;
-  padding:0 2px; transition:color .16s; letter-spacing:.01em}
-nav button svg{width:21px; height:21px; stroke:currentColor; fill:none; stroke-width:1.7;
+  justify-content:center; gap:3px; color:rgba(245,238,229,.44); font-size:9.4px; font-weight:600;
+  padding:0 1px; transition:color .16s; letter-spacing:-.005em; min-width:0}
+nav button svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:1.7;
   stroke-linecap:round; stroke-linejoin:round}
 nav button[aria-current="page"]{color:var(--rose)}
 .view{display:none; animation:in .3s ease-out}
@@ -241,3 +241,11 @@ nav button[aria-current="page"]{color:var(--rose)}
   .rtable{font-size:11pt}
   .rtable td,.rtable th{border-color:#bbb}
 }
+
+/* seven-tab bar on narrow phones */
+@media (max-width:359px){ nav button{font-size:8.6px} nav button svg{width:18px;height:18px} }
+/* practice list reuses .love but sits flush inside its card */
+#pracList .love:first-of-type{padding-top:0}
+#pracList h3:first-child{margin-top:0}
+#pracList .love .body p{margin-bottom:10px}
+#pracList .love .body p:last-of-type{margin-bottom:12px}

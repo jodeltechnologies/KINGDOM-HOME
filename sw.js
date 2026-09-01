@@ -1,8 +1,8 @@
 /* Kingdom Home service worker.
    Bump CACHE when you change any file, or phones will keep the old copy. */
-const CACHE = 'kingdom-home-v1';
+const CACHE = "kingdom-home-v2";
 const SHELL = [
-  './', './index.html', './styles.css', './data.js', './app.js',
+  './', './index.html', './styles.css', './data.js', './practices.js', './app.js', './steps.js',
   './manifest.webmanifest',
   './img/hero.jpg', './img/bg.jpg',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'

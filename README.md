@@ -12,10 +12,12 @@ serverless function. If you can push to GitHub you can deploy this.
 ## What is in here
 
 ```
-index.html               the whole interface, six tabs
+index.html               the whole interface, seven tabs
 styles.css               design system, colours taken from your photograph
-data.js                  messages, the five loves, 228 readings across three tracks
+data.js                  messages, the five loves, readings for four tracks
+practices.js             the 47 Evans family practices, verses and little-ones track
 app.js                   all the logic
+steps.js                 the Steps tab: practices, name cards, shoebox, verses
 sw.js                    service worker, this is what makes Install appear on Android
 manifest.webmanifest     app name, icons, home screen behaviour
 vercel.json              headers, mainly so the service worker updates properly
@@ -168,3 +170,25 @@ you read it there. Everything the app stores is your family's own record.
 The 101-day reading plan, the Bible person track and the Bible event track are original to this
 app and free to change. They are in `data.js` as `CANON`, `CHARS` and `EVENTS`, four fields each:
 reference, title, question for the children, prayer point. Add to them freely.
+
+
+---
+
+## The Steps tab
+
+`practices.js` holds 47 things Tony and Lois Evans describe actually doing in their own
+home, taken chapter by chapter from *Raising Kingdom Kids*. Each one carries two fields:
+
+- `e` — what he did, as the book records it
+- `y` — how it works in a house with a 5, a 4 and a 1 year old
+
+and a `start` value of either `'now'` or an age. The list re-sorts itself against the ages you
+enter under **Your house**, so as the children grow, practices move from *Wait for their age*
+into *Start now* on their own. Seven of the forty-seven are currently waiting: table manners at
+six, school consequences at five, friendships at eight, the eagle story at six, earned freedom
+at seven, the purity conversation at sixteen, and paid work at fourteen.
+
+The **Little ones** reading track in `practices.js` (`LITTLE`, 60 entries) is written for children
+under six: short narrative passages, one plain question a 4 year old can answer, one thing to
+pray. It is the default in the roster and on the Altar tab while your eldest is seven or under.
+`LITTLEVERSES` holds 24 memory verses of five to eight words, one a fortnight for a year.

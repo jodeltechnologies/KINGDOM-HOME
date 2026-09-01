@@ -137,7 +137,7 @@ function renderStreaks(){
   $('#streakWord').textContent=w;
 }
 
-function trackData(k){ return k==='char'?CHARS : k==='event'?EVENTS : CANON; }
+function trackData(k){ return k==='little'?LITTLE : k==='char'?CHARS : k==='event'?EVENTS : CANON; }
 function todaysEntry(){
   const r=S.roster; if(!r) return null;
   const t=iso(today()); const row=r.rows.find(x=>x.d===t); return row;
@@ -238,7 +238,8 @@ $('#copyMsg').onclick=async()=>{
 function planFor(d){
   const r=S.roster;
   if(r){ const row=r.rows.find(x=>x.d===iso(d)); if(row) return row; }
-  const arr=CANON, i=((dayIndex(d)%arr.length)+arr.length)%arr.length, e=arr[i];
+  const young = (typeof FAM!=='undefined') && FAM.kids.length && Math.max(...FAM.kids.map(k=>+k.age||0)) <= 7;
+  const arr = young ? LITTLE : CANON, i=((dayIndex(d)%arr.length)+arr.length)%arr.length, e=arr[i];
   return {d:iso(d), w:'', r:e[0], t:e[1], q:e[2], p:e[3], fallback:true};
 }
 function renderDevo(){
@@ -254,10 +255,10 @@ function renderDevo(){
   const p=planFor(d);
   $('#planTitle').textContent = p.fallback ? 'Suggested family reading' : 'Your family reading';
   $('#planLede').textContent = p.fallback
-    ? 'You have not built a roster yet, so this is the straight-through-the-Bible plan. Build a roster to fix the track and the leader.'
+    ? 'No roster yet, so this is the little ones track, sized for children under six. Build a roster to fix the track and the leader.'
     : (S.roster.trackName+'. Day '+(S.roster.rows.findIndex(x=>x.d===p.d)+1)+' of '+S.roster.rows.length+'.');
   $('#pRef').textContent=p.r; $('#pTtl').textContent=p.t;
-  $('#pQa').innerHTML='<b>Ask the children</b><div>'+esc(p.q)+'</div><b>Pray for</b><div>'+esc(p.p)+'</div>';
+  $('#pQa').innerHTML='<b>Ask them</b><div>'+esc(p.q)+'</div><b>Pray</b><div>'+esc(p.p)+'</div>';
   $('#pWho').textContent = p.w || 'not set';
 
   const rec=S.altar[iso(d)]||{};
@@ -283,7 +284,9 @@ function buildRoster(){
   const track=$('#rTrack').value, weeks=+$('#rWeeks').value, turn=$('#rTurn').value;
   const start=fromIso($('#rStart').value||iso(today()));
   const arr=trackData(track), n=weeks*7, rows=[];
-  const tn = track==='char' ? 'One Bible person a day' : track==='event' ? 'One Bible event a day' : 'Straight through the Bible';
+  const tn = track==='little' ? 'Little ones, built for under sixes'
+    : track==='char' ? 'A Bible person a day'
+    : track==='event' ? 'A Bible event a day' : 'Through the Bible';
   for(let i=0;i<n;i++){
     const d=addDays(start,i), e=arr[i%arr.length];
     let who;

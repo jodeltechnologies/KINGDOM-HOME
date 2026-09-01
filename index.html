@@ -260,6 +260,7 @@
     <div class="fld">
       <label class="f" for="rTrack">What we walk through</label>
       <select id="rTrack">
+        <option value="little" selected>Little ones, under six</option>
         <option value="canon">Through the Bible</option>
         <option value="char">A Bible person a day</option>
         <option value="event">A Bible event a day</option>
@@ -295,6 +296,87 @@
   <div class="card ink">
     <h2>Let her lead half of it</h2>
     <p class="lede" style="margin-bottom:0">You wrote that there is no time to train the children in the way of the Lord. A roster fixes half of that, because it removes the excuse of forgetting. But it does something else too. When your wife leads Thursday and the children listen to her the way they listen to you, she stops feeling like staff in her own home. Headship in Scripture means you carry responsibility for the altar being kept, not that your voice is the only one heard at it.</p>
+  </div>
+</section>
+
+
+<!-- ============ STEPS ============ -->
+<section class="view" id="v-steps">
+  <header class="mast">
+    <p class="kicker">Raising Kingdom Kids, the practices</p>
+    <h1>What he actually did</h1>
+    <p class="sub">Not his ideas, his habits. Everything Tony and Lois Evans describe doing in their own home, sorted by whether your children are old enough for it yet.</p>
+  </header>
+
+  <div class="card">
+    <h2>Your house</h2>
+    <p class="lede">The list below re-sorts itself around these ages, so get them right.</p>
+    <div class="grid2">
+      <div class="fld"><label class="f" for="famHis">Your age</label><input type="number" id="famHis" min="16" max="99"></div>
+      <div class="fld"><label class="f" for="famHer">Her age</label><input type="number" id="famHer" min="16" max="99"></div>
+    </div>
+    <label class="f">Children, name and age</label>
+    <div id="kidRows"></div>
+    <button class="btn ghost sm" id="kidAdd">Add another child</button>
+  </div>
+
+  <div class="card rose">
+    <h2>Started so far</h2>
+    <p style="font-family:var(--ff-d);font-size:34px;font-weight:700;line-height:1;margin:6px 0 10px" id="pracCount">0 of 0</p>
+    <div style="height:7px;background:rgba(255,255,255,.6);border-radius:99px;overflow:hidden;margin-bottom:11px">
+      <div id="pracBar" style="height:100%;width:0;background:var(--rose-dark);transition:width .4s"></div>
+    </div>
+    <p class="lede" style="margin:0" id="pracWord"></p>
+  </div>
+
+  <div class="chips" id="pracChips" style="margin-bottom:4px">
+    <button class="chip rose" data-pf="now" aria-pressed="true">Start now</button>
+    <button class="chip rose" data-pf="later" aria-pressed="false">Wait for their age</button>
+    <button class="chip rose" data-pf="all" aria-pressed="false">Everything</button>
+  </div>
+
+  <div class="card" id="pracList"></div>
+
+  <div class="card">
+    <h2>Name cards for the wall</h2>
+    <p class="lede">Lois Evans hung a vertical row of signs beside the doorway to the bedrooms, one per child: the name, what it means, and a verse chosen for that child. Fill these in and print them.</p>
+    <div id="nameRows"></div>
+    <button class="btn rose full" id="namePrint" style="margin-top:12px">Print the cards</button>
+    <p class="note" style="margin-bottom:0"><b>Do the baby too.</b> He cannot read it. He will grow up under it, which is the point.</p>
+  </div>
+
+  <div class="card">
+    <h2>Give, save, spend</h2>
+    <p class="lede">Their three words, in that order, with a shoebox in the kitchen holding the tenth. Your 5 year old can grasp this with coins. Ten to God first, twenty saved, seventy to spend.</p>
+    <div class="streak" style="margin-bottom:12px">
+      <div><b id="boxGive" style="font-size:20px;color:var(--leaf)">0 F</b><small>in the box,<br>for God</small></div>
+      <div><b id="boxSave" style="font-size:20px">0 F</b><small>saved</small></div>
+      <div><b id="boxSpend" style="font-size:20px;color:var(--ink-soft)">0 F</b><small>to spend</small></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <input type="number" id="boxAmt" placeholder="Amount in F" style="flex:1">
+      <input type="text" id="boxWho" placeholder="Which child" style="flex:1">
+    </div>
+    <div class="btnrow grow">
+      <button class="btn leaf" id="boxAdd">Split it</button>
+      <button class="btn ghost" id="boxGiven">We gave it at church</button>
+    </div>
+    <div id="boxLog" style="margin-top:10px"></div>
+  </div>
+
+  <div class="card">
+    <h2>This fortnight&rsquo;s verse</h2>
+    <p class="lede">Short enough for a 4 year old to hold. Write it on a card and stand it on the table, the way Lois did. Recite it at the monthly family lunch.</p>
+    <div class="reading" id="mvNow"></div>
+    <details class="love" style="border-top:none"><summary><span class="mk" style="font-size:13px">24</span><span class="nm"><b>All twenty four</b><i>One a fortnight, a year of them</i></span><span class="caret">+</span></summary>
+      <div class="body" style="padding-left:0"><div id="mvList"></div></div>
+    </details>
+  </div>
+
+  <div class="card ink">
+    <h2>The order he would put them in</h2>
+    <p class="lede" style="margin-bottom:12px">If you did nothing else from this book, he would want these four, and roughly in this sequence.</p>
+    <div id="firstFour"></div>
   </div>
 </section>
 
@@ -422,12 +504,15 @@
     <button data-view="write"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-11.9 7.6L3 21l1.9-6.1A8.4 8.4 0 1 1 21 11.5z"/></svg>Write</button>
     <button data-view="devo"><svg viewBox="0 0 24 24"><path d="M3 4.5h6a3 3 0 0 1 3 3V20a2.4 2.4 0 0 0-2.4-2.2H3z"/><path d="M21 4.5h-6a3 3 0 0 0-3 3V20a2.4 2.4 0 0 1 2.4-2.2H21z"/></svg>Altar</button>
     <button data-view="roster"><svg viewBox="0 0 24 24"><rect x="3" y="4.8" width="18" height="16" rx="2.2"/><path d="M3 9.6h18M8.2 3v3.4M15.8 3v3.4"/></svg>Roster</button>
+    <button data-view="steps"><svg viewBox="0 0 24 24"><path d="M4 20.5V16m0 0V4.6c3.4-1.6 6.8 1.6 10.2 0v11.2C10.8 17.4 7.4 14.2 4 16z"/></svg>Steps</button>
     <button data-view="more"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 14.6a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.2a2 2 0 0 1-4 0v-.1a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7h-.2a2 2 0 0 1 0-4h.1a1.6 1.6 0 0 0 1.1-2.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 2.7-1.1v-.2a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7h.2a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1.1z"/></svg>Set up</button>
   </div>
 </nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="./data.js"></script>
+<script src="./practices.js"></script>
 <script src="./app.js"></script>
+<script src="./steps.js"></script>
 </body>
 </html>
