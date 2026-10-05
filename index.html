@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./styles.css?v=6-events">
 </head>
 <body>
 <div id="bgphoto"></div><div id="bgscrim"></div>
@@ -190,7 +190,7 @@
   <header class="mast">
     <p class="kicker">Family altar</p>
     <h1>The table</h1>
-    <p class="sub">Pick any day, back or forward. Open the church's devotionals, then keep your own record of what your family actually did.</p>
+    <p class="sub">Read Scripture, work through a study together, and keep your family's prayer record.</p>
   </header>
 
   <div class="card">
@@ -203,13 +203,19 @@
   </div>
 
   <div class="card">
-    <h2>Deeper Life devotionals</h2>
-    <p class="lede" id="dmLede"></p>
-    <div class="btnrow grow">
-      <a class="btn rose" id="dmAdult" href="https://www.dailymanna.app/" target="_blank" rel="noopener">Daily Manna, for us</a>
-      <a class="btn leaf" id="dmKids" href="https://www.dailymanna.app/" target="_blank" rel="noopener">Sincere Milk, for the children</a>
+    <h2>Our Bible library</h2>
+    <p class="lede" id="bibleDate"></p>
+    <div class="library-links">
+      <button class="library-link" data-go="study"><span class="library-icon">01</span><span><b>Bible studies for us</b><small>300 event studies in 26 groups, plus 12 topic studies for husband and wife.</small></span><span aria-hidden="true">&#8250;</span></button>
+      <button class="library-link" data-go="characters"><span class="library-icon">02</span><span><b>Bible character studies</b><small>20 lives, clear lessons, strengths, failures, and application.</small></span><span aria-hidden="true">&#8250;</span></button>
+      <button class="library-link" data-go="reading"><span class="library-icon">03</span><span><b>Bible reading plans</b><small>8 methods. Choose your pace and record each day's reading.</small></span><span aria-hidden="true">&#8250;</span></button>
     </div>
-    <p class="note"><b>Why these open outward.</b> <em>Daily Manna</em> and <em>Sincere Milk</em> are written and owned by Deeper Christian Life Ministry. This app will not hold copies of three months of their text, and it should not. The buttons take you to the ministry's own site, where the day's reading is published for free, and you read it there. Everything below is your family's own record, and it stays on this phone.</p>
+  </div>
+
+  <div class="card">
+    <h2>For the children</h2>
+    <a class="btn leaf full" id="dmKids" href="https://www.dailymanna.app/" target="_blank" rel="noopener">Sincere Milk, for the children</a>
+    <p class="note">Sincere Milk is written and owned by Deeper Christian Life Ministry. Read the day's portion on the ministry's site. Your children's reading tracks, memory verses, and activities stay in their existing sections.</p>
   </div>
 
   <div class="card">
@@ -242,6 +248,54 @@
     <p class="lede" style="margin-bottom:12px">Tony Evans calls it table time. Short, warm, every day, at the same hour. Long and holy once a week will not form a child. Short and steady will.</p>
     <div id="tableTime"></div>
   </div>
+</section>
+
+<!-- ============ BIBLE LIBRARY ============ -->
+<section class="view" id="v-study" aria-labelledby="studyHeading">
+  <header class="mast"><p class="kicker">For husband and wife</p><h1 id="studyHeading">Bible studies for us</h1><p class="sub">Study by topic or Bible event. Read together, explain the meaning, and agree on one response.</p></header>
+  <div class="library-nav noprint"><button class="btn ghost sm" data-go="devo">Family altar</button><button class="btn ghost sm" data-go="characters">Characters</button><button class="btn ghost sm" data-go="reading">Reading plans</button></div>
+  <div class="card">
+    <div class="fld"><label class="f" for="studySearch">Find a topic or passage</label><input id="studySearch" type="search" placeholder="Love, prayer, Saul, John 15..."></div>
+    <div class="fld"><label class="f" for="studyKind">Study arrangement</label><select id="studyKind"><option value="all">All studies</option><option value="topic">Studies by topic</option><option value="event">Studies by Bible event</option></select></div>
+    <div id="eventFilters" hidden>
+      <div class="grid2">
+        <div class="fld"><label class="f" for="eventTestament">Testament</label><select id="eventTestament"><option value="all">Both Testaments</option><option value="OT">Old Testament</option><option value="NT">New Testament</option></select></div>
+        <div class="fld"><label class="f" for="eventBook">Bible book</label><select id="eventBook"><option value="all">All books</option></select></div>
+      </div>
+      <div class="fld"><label class="f" for="eventGroup">Related event group</label><select id="eventGroup"><option value="all">All event groups</option></select></div>
+      <p class="note" id="eventGroupDescription">Groups follow the biblical narrative from Genesis to Revelation. Every event has a separate lesson and saved notes.</p>
+    </div>
+    <div class="fld"><label class="f" for="studySelect">Choose a lesson</label><select id="studySelect"></select></div>
+    <p class="lede" id="studySummary" role="status" aria-live="polite"></p>
+    <p class="note">Lessons use original explanations of Scripture. Matthew Henry is a linked companion commentary. Open the relevant chapter in his commentary and compare the explanation with Scripture. The other study Bibles are linked below.</p>
+  </div>
+  <article class="card" id="studyDetail"></article>
+  <div class="btnrow grow noprint" id="studyNavigation"><button class="btn ghost" id="studyPrevious">Previous lesson</button><button class="btn leaf" id="studyNext">Next lesson</button></div>
+  <div class="card" id="studyJournal">
+    <h2>Our response</h2><p class="lede">Write what you learned and the action you will take together.</p>
+    <div class="fld"><label class="f" for="studyNotes">Study notes and prayer</label><textarea id="studyNotes" placeholder="What does this passage teach us? What will we change?"></textarea></div>
+    <div class="btnrow grow"><button class="btn leaf" id="studyComplete">Mark lesson studied</button><button class="btn ghost" id="studySave">Save notes</button></div>
+    <p id="studySaved" class="save-status" role="status" aria-live="polite"></p>
+  </div>
+  <div class="card"><h2>More study resources</h2><p class="lede">The resources shown in your screenshot, plus Matthew Henry. Open a source, find the current passage, and compare its explanation with Scripture.</p><div id="resourceList"></div><p class="note">Publisher links open previews or edition details. Full study Bible notes need your own copy or licensed access. External Scripture, commentary, and videos need an internet connection.</p></div>
+  <div class="card"><h2>Study another passage</h2><p class="lede">Use the same process for a passage outside these lessons.</p><form id="passageForm"><div class="fld"><label class="f" for="customPassage">Bible reference</label><input id="customPassage" maxlength="120" required placeholder="Example: 1 Samuel 10:10"></div><button class="btn rose full" type="submit">Open passage and study workspace</button></form><div id="passageWorkspace" hidden></div></div>
+</section>
+
+<section class="view" id="v-characters" aria-labelledby="characterHeading">
+  <header class="mast"><p class="kicker">Our Bible library</p><h1 id="characterHeading">Bible character studies</h1><p class="sub">Read each life in context. Learn from faithfulness, failure, and God's response.</p></header>
+  <div class="library-nav noprint"><button class="btn ghost sm" data-go="devo">Family altar</button><button class="btn ghost sm" data-go="study">Bible studies</button><button class="btn ghost sm" data-go="reading">Reading plans</button></div>
+  <div class="card"><div class="fld"><label class="f" for="characterSearch">Find a person or theme</label><input id="characterSearch" type="search" placeholder="Joseph, courage, forgiveness..."></div><div class="fld"><label class="f" for="characterTestament">Testament</label><select id="characterTestament"><option value="all">All characters</option><option value="OT">Old Testament</option><option value="NT">New Testament</option></select></div><div class="fld"><label class="f" for="characterSelect">Choose a character</label><select id="characterSelect"></select></div><p class="lede" id="characterSummary" role="status" aria-live="polite"></p></div>
+  <article class="card" id="characterDetail"></article>
+  <div class="card" id="characterJournal"><h2>Personal reflection</h2><div class="fld"><label class="f" for="characterNotes">What will you learn from this life?</label><textarea id="characterNotes" placeholder="The example to follow, the mistake to avoid, and one action for this week."></textarea></div><div class="btnrow grow"><button class="btn leaf" id="characterComplete">Mark character studied</button><button class="btn ghost" id="characterSave">Save reflection</button></div><p class="save-status" id="characterSaved" role="status" aria-live="polite"></p></div>
+</section>
+
+<section class="view" id="v-reading" aria-labelledby="readingHeading">
+  <header class="mast"><p class="kicker">Our Bible library</p><h1 id="readingHeading">Bible reading plans</h1><p class="sub">Choose a method, set your start date, and read at a steady pace.</p></header>
+  <div class="library-nav noprint"><button class="btn ghost sm" data-go="devo">Family altar</button><button class="btn ghost sm" data-go="study">Bible studies</button><button class="btn ghost sm" data-go="characters">Characters</button></div>
+  <div class="card"><div class="fld"><label class="f" for="readingMethod">Reading method</label><select id="readingMethod"></select></div><p class="lede" id="readingDescription"></p><div class="two"><div class="fld"><label class="f" for="readingStart">Plan start date</label><input id="readingStart" type="date" required></div><div class="fld"><label class="f" for="readingVersion">Read Scripture in</label><select id="readingVersion"><option value="KJV">KJV</option><option value="NKJV">NKJV</option><option value="NIV">NIV</option><option value="ESV">ESV</option><option value="CSB">CSB</option><option value="NLT">NLT</option></select></div></div><button class="btn rose full" id="readingBegin">Save start date and begin</button><p class="save-status" id="readingState" role="status" aria-live="polite"></p></div>
+  <div class="card"><h2>Your progress</h2><p id="readingProgressText" class="lede"></p><progress id="readingProgress" max="100" value="0" aria-label="Completed reading days"></progress><div class="dev-nav"><button class="arw" id="readingPrev" aria-label="Previous reading day">&#8249;</button><div class="fld day-field"><label class="f" for="readingDay">Plan day</label><input id="readingDay" type="number" min="1" step="1"></div><button class="arw" id="readingNext" aria-label="Next reading day">&#8250;</button></div><div class="btnrow grow"><button class="btn ghost sm" id="readingToday">Today's scheduled reading</button><button class="btn ghost sm" id="readingResume">First unread day</button></div></div>
+  <article class="card"><h2 id="readingDayTitle"></h2><p class="lede" id="readingDate"></p><div id="readingPassages"></div><div class="study-block"><h3>Reflect after reading</h3><ol><li>What does the passage say about God and people?</li><li>What command, promise, or warning belongs to this context?</li><li>What response will you make today?</li></ol></div><div class="fld"><label class="f" for="readingNotes">Reading notes</label><textarea id="readingNotes" placeholder="One truth, one question, and one prayer."></textarea></div><div class="btnrow grow"><button class="btn leaf" id="readingDone">Mark day read</button><button class="btn ghost" id="readingSave">Save notes</button></div><p class="save-status" id="readingSaved" role="status" aria-live="polite"></p><p class="note">Plan references and your saved notes work offline after the app loads once. Read the text in your own Bible or use the online Scripture links.</p></article>
+  <div class="card"><details class="schedule-details"><summary>Full reading schedule</summary><p class="lede">Tap a day to open its passages. Dates follow your saved start date.</p><div class="schedule-scroll"><table class="rtable" id="readingSchedule"></table></div></details><button class="btn ghost full" id="readingExport">Download plan as CSV</button></div>
 </section>
 
 <!-- ============ ROSTER ============ -->
@@ -520,9 +574,13 @@
 </nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="./data.js"></script>
+<script src="./data.js?v=6-events"></script>
 <script src="./practices.js"></script>
-<script src="./app.js"></script>
+<script src="./bible-data.js?v=6-events"></script>
+<script src="./bible-events.js?v=6-events"></script>
+<script src="./bible-event-library.js?v=6-events"></script>
+<script src="./app.js?v=6-events"></script>
 <script src="./steps.js"></script>
+<script src="./bible.js?v=6-events"></script>
 </body>
 </html>

@@ -1,8 +1,9 @@
 # Our Kingdom Home
 
 A family app for one household in Buea. Five ways to love a wife, grounded in Scripture. A
-WhatsApp writer that sounds like a man and not like a machine. A family altar record tied to
-Deeper Life's *Daily Manna* and *Sincere Milk*. A devotion roster you can print or download as Word.
+WhatsApp writer that sounds like a man and not like a machine. A family altar record, Bible
+studies for husband and wife, and the children's existing *Sincere Milk* link. A devotion roster
+you can print or download as Word.
 
 No build step. No framework. No `npm install`. Plain HTML, CSS and JavaScript, plus one
 serverless function. If you can push to GitHub you can deploy this.
@@ -12,12 +13,16 @@ serverless function. If you can push to GitHub you can deploy this.
 ## What is in here
 
 ```
-index.html               the whole interface, seven tabs
+index.html               the interface, seven tabs and three adult Bible views
 styles.css               design system, colours taken from your photograph
 data.js                  messages, the five loves, readings for four tracks
 practices.js             the 47 Evans family practices, verses and little-ones track
 app.js                   all the logic
 steps.js                 the Steps tab: practices, name cards, shoebox, verses
+bible-data.js            12 topic studies, 20 character profiles, 8 reading methods
+bible-events.js          preserved original event lessons and stable IDs
+bible-event-library.js   300 separate event studies in 26 related groups
+bible.js                 adult study journals, progress, schedules, and import merging
 sw.js                    service worker, this is what makes Install appear on Android
 manifest.webmanifest     app name, icons, home screen behaviour
 vercel.json              headers, mainly so the service worker updates properly
@@ -208,14 +213,60 @@ keep serving the old copy from cache and you will think the deploy failed.
 
 ---
 
-## A note on Daily Manna and Sincere Milk
+## Adult Bible library and children's devotion
 
-Both are written and owned by Deeper Christian Life Ministry. This app does not hold copies of
-them. The Altar tab links out to the ministry's own site where the day's portion is published, and
-you read it there. Everything the app stores is your family's own record.
+The Altar tab opens three adult sections: **Bible studies for us**, **Bible character studies**,
+and **Bible reading plans**. The adult Daily Manna button has been removed. The children's
+Sincere Milk link, reading tracks, memory verses, activities, and roster options stay available.
+The original `practices.js` and `steps.js` files are unchanged.
 
-The 101-day reading plan, the Bible person track and the Bible event track are original to this
-app and free to change. They are in `data.js` as `CANON`, `CHARS` and `EVENTS`, four fields each:
+There are 312 studies for husband and wife: 12 topic studies and 300 separate event studies
+in 26 related groups from Genesis to Revelation. Every lesson includes
+context, at least three explained points with Scripture references, discussion questions, an
+action, prayer, and a linked Matthew Henry companion commentary. Select Studies by Bible event
+to filter by Testament, book, or related group. Each event has a separate journal and completion
+record. Previous and Next navigate only the matching lessons. All twelve original event IDs
+remain available for earlier saved records.
+
+The collection has 178 Old Testament and 122 New Testament lessons. The plagues, resurrection
+encounters, and seven church messages each have individual lessons. Revelation visions are
+identified as visions; dates are not assigned to their future fulfilment. This is a substantial
+selection rather than a claim to include every event in Scripture. See EVENT_STUDY_INDEX.txt
+for the complete lesson list and UPDATE_GUIDE.txt for website update instructions.
+
+Twenty character profiles include background, strengths, failures or textual limitations, four
+explained lessons, questions, action, and prayer. Profiles do not invent moral failures where the
+selected biblical narrative does not record one.
+
+The eight reading methods are whole Bible in 365 days, paired Testaments in 365 days, New
+Testament in 90 days, Old Testament in 270 days, Gospels in 30 days, Psalms in 30 days, Proverbs in
+31 days, and a 28-day topical selection. Complete plans use the 66-book Bible and include every
+target chapter once. Paired readings include the Old Testament daily and the New Testament on
+260 days. Each method preserves its own start date, notes, completed days, and current position.
+Dates display as day/month/year. Download the current plan as CSV from its schedule card.
+
+Study and reading notes autosave as you type. Completion is reversible. **First unread day**
+resumes a reading plan; **Today's scheduled reading** uses the saved start date. Changing the
+start date retains existing notes and completed days. The existing backup and optional sync
+include the adult library records. Imports retain both phones' notes and use the latest dated
+record for a completion change.
+
+The screenshot's six study Bibles appear as companion resource links, alongside Matthew Henry
+and BibleProject. Their licensed notes are not bundled. Publisher pages supply previews or
+edition details; use your own licensed edition for complete notes. The NIV resource currently
+opens the publisher's NIV catalogue, where the title should be searched. Scripture and external
+resources need internet. Original lessons, plan references, journals, and progress work offline
+after the updated app has loaded once and its service worker has cached the files.
+
+For a passage outside the lesson collection, use **Study another passage**. This opens Scripture,
+Matthew Henry's book list, observation questions, and a saved notebook. It does not invent an
+automatic commentary for an arbitrary reference.
+
+Sincere Milk is written and owned by Deeper Christian Life Ministry. The app holds the family's
+own records and links outward to the ministry's site for the children's devotional text.
+
+The original family reading, Bible person, and Bible event tracks remain in `data.js` as
+`CANON`, `CHARS` and `EVENTS`, four fields each:
 reference, title, question for the children, prayer point. Add to them freely.
 
 

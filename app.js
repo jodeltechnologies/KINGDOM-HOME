@@ -53,7 +53,8 @@ const nameOr = (v,f)=> (v&&v.trim()) ? v.trim() : f;
 /* ---------- navigation ---------- */
 function go(v){
   $$('.view').forEach(s=>s.classList.toggle('on', s.id==='v-'+v));
-  $$('nav button').forEach(b=>{ const on=b.dataset.view===v;
+  const navView=['study','characters','reading'].includes(v)?'devo':v;
+  $$('nav button').forEach(b=>{ const on=b.dataset.view===navView;
     on ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current'); });
   window.scrollTo({top:0,behavior:'instant'});
 }
@@ -245,17 +246,12 @@ function planFor(d){
 function renderDevo(){
   const d=fromIso($('#dDate').value||iso(today()));
   const isToday = iso(d)===iso(today());
-  const rel = Math.round((fromIso(iso(d))-today())/86400000);
-  $('#dmLede').textContent = isToday
-    ? 'Today, '+fmtLong(d)+'. Open the ministry\u2019s site and read the day\u2019s portion there.'
-    : fmtLong(d)+(rel>0?', '+rel+' day'+(rel>1?'s':'')+' ahead.':', '+(-rel)+' day'+(rel<-1?'s':'')+' back.');
-  $('#dmAdult').href='https://www.dailymanna.app/';
-  $('#dmKids').href='https://www.dailymanna.app/';
+  $('#bibleDate').textContent = (isToday?'Today, ':'')+fmtLong(d)+'. Choose a study, a character, or a reading plan.';
 
   const p=planFor(d);
   $('#planTitle').textContent = p.fallback ? 'Suggested family reading' : 'Your family reading';
   $('#planLede').textContent = p.fallback
-    ? 'No roster yet, so this is the little ones track, sized for children under six. Build a roster to fix the track and the leader.'
+    ? 'A suggested passage for your family. Build a roster to choose the track and the leader.'
     : (S.roster.trackName+'. Day '+(S.roster.rows.findIndex(x=>x.d===p.d)+1)+' of '+S.roster.rows.length+'.');
   $('#pRef').textContent=p.r; $('#pTtl').textContent=p.t;
   $('#pQa').innerHTML='<b>Ask them</b><div>'+esc(p.q)+'</div><b>Pray</b><div>'+esc(p.p)+'</div>';
@@ -336,7 +332,7 @@ $('#rPdf').onclick=()=>{
    '</style></head><body><h1>Family altar roster</h1><p class="s">'+esc(r.trackName)+'. '+
    fmtLong(fromIso(r.start))+' to '+fmtLong(fromIso(r.rows[r.rows.length-1].d))+'. Led by '+esc(r.hus)+' and '+esc(r.wif)+
    '.</p><table><thead><tr><th>Date</th><th>Leads</th><th>Reading</th><th>Question for the children</th></tr></thead><tbody>'+
-   rowsHtml+'</tbody></table><footer>Our Kingdom Home &middot; Buea. Devotional guides: Daily Manna and Sincere Milk, Deeper Christian Life Ministry.</footer></body></html>');
+   rowsHtml+'</tbody></table><footer>Our Kingdom Home &middot; Buea. Bible studies, character studies, and family reading.</footer></body></html>');
   w.document.close();
   setTimeout(()=>{ w.focus(); w.print(); }, 400);
   toast('Choose Save as PDF in the print sheet.');
@@ -398,7 +394,7 @@ function docxRoster(){
    '<w:tblGrid><w:gridCol w:w="1400"/><w:gridCol w:w="1500"/><w:gridCol w:w="2600"/><w:gridCol w:w="3800"/></w:tblGrid>'+
    head+body+'</w:tbl>'+
    P('',{after:200})+
-   P('Our Kingdom Home, Buea. Daily devotional guides: Daily Manna and Sincere Milk, published by Deeper Christian Life Ministry.',{sz:16,i:1,color:'7A716E'})+
+   P('Our Kingdom Home, Buea. Bible studies for husband and wife. Children’s devotional: Sincere Milk, Deeper Christian Life Ministry.',{sz:16,i:1,color:'7A716E'})+
    '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1000" w:right="900" w:bottom="1000" w:left="900"/></w:sectPr>'+
    '</w:body></w:document>';
   return zip([
@@ -784,6 +780,8 @@ function mergeIn(d){
   const ros=get('roster'); if(ros && !Store.get('roster',null)){ Store.set('roster',ros); touched.push('roster'); }
   const rem=get('rems');   if(rem && !Store.get('rems',null))  { Store.set('rems',rem); }
 
+  if(typeof mergeBibleRecords==='function') mergeBibleRecords(get,touched);
+
   return {touched:[...new Set(touched)], addedNotes};
 }
 
@@ -795,7 +793,8 @@ const SYNCED=[
   'fam',                          // ages, children's names, name-card meanings and verses
   'roster','altar','acts','sent', // the roster, the altar record and notes, acts, messages sent
   'done','box',                   // practices started, the give/save/spend box
-  'rems'                          // reminder times
+  'rems',                         // reminder times
+  'bibleStudies','bibleCharacters','bibleReading','biblePassages'
 ];
 $('#sbPush').onclick=async()=>{
   const st=$('#sbState'); st.textContent='Sending...';

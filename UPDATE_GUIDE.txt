@@ -1,0 +1,82 @@
+KINGDOM HOME: GENESIS TO REVELATION EVENT UPDATE
+Updated 05/10/2026
+
+WHAT THIS UPDATE ADDS
+300 separate event studies in 26 related groups.
+178 Old Testament lessons and 122 New Testament lessons.
+The existing 12 topic studies, 20 character profiles, and 8 reading methods remain.
+Each event includes context, at least three explained points, Scripture references,
+discussion questions, a practical response, prayer, saved notes, and completion.
+Matthew Henry is linked as a companion commentary; the explanations are original.
+
+HOW TO USE THE EVENT STUDIES
+1. Open Altar, then Bible studies for us.
+2. Under Study arrangement, select Studies by Bible event.
+3. Choose Both Testaments, Old Testament, or New Testament.
+4. Select a Bible book or a related event group.
+5. Choose a specific event. Read its passage in your own Bible or the online link.
+6. Read each explained point, then open the linked Matthew Henry commentary
+   and find the named chapter to compare its explanation.
+7. Discuss the questions and agree on one practical response.
+8. Write your notes and select Mark lesson studied. Notes also save while typing.
+9. Use Previous lesson and Next lesson within the current filtered list.
+10. Select All studies to browse both event and topic lessons.
+
+Related events keep separate journals. For example, the ten plagues are separate
+lessons within the Moses group; each church message is separate in Revelation.
+EVENT_STUDY_INDEX.txt lists all lessons and passages for review.
+The arrangement groups related narratives rather than claiming an exact chronology.
+Revelation visions are labelled as visions, and future fulfilment receives no dates.
+This is a substantial selection of events, not a claim to include every event in Scripture.
+
+CHILDREN AND EXISTING RECORDS
+The original children's reading data, memory verses, practices, activities, and
+roster logic are unchanged. The Sincere Milk link stays available for children.
+The existing 12 event IDs remain, preserving notes and completion from the earlier
+update. Original adult character and reading-plan content is unchanged.
+Notes and progress stay in the same browser. Use the family backup before moving
+to another browser or device. A ZIP update does not transfer browser records.
+
+HOW TO UPDATE YOUR EXISTING WEBSITE
+1. Open your current site, go to Set up, and select Save our file. Keep the backup.
+2. Download and extract KINGDOM-HOME-Updated.zip.
+3. Open the KINGDOM-HOME-main folder inside the extracted folder.
+4. Copy these changed files into your existing project, replacing the earlier copies:
+   index.html
+   bible-events.js
+   bible.js
+   sw.js
+   README.md
+   UPDATE_GUIDE.txt
+5. Add these new files to the same project folder:
+   bible-event-library.js
+   EVENT_STUDY_INDEX.txt
+6. Keep all the other existing project files, including bible-data.js, data.js,
+   styles.css, app.js, practices.js, steps.js, images, icons, and configuration.
+   The ZIP includes the complete project if replacing the full source folder is easier.
+7. In your existing GitHub repository, use Add file, Upload files. Upload the files
+   at the same level as the existing index.html. Do not upload the ZIP as the website.
+8. Commit the updated files to the branch used by your Vercel project.
+9. Wait for the existing Vercel deployment to finish. Keep its existing environment
+   settings and project configuration.
+10. Open the same live site while online and refresh. Confirm the Altar link reports
+    300 event studies. Then choose Studies by Bible event and test a group.
+
+OFFLINE USE
+The new service worker and versioned script URLs refresh the earlier cached copy.
+After loading the update online once and allowing its files to finish loading,
+lessons, references, notes, and progress are available offline. External Bible text,
+commentary, publisher pages, and videos need internet; use your own Bible offline.
+Updating does not clear household browser data.
+
+VERIFICATION
+Passed: every event renders in the state/DOM test harness, every group and book
+filters correctly, Testament changes reset incompatible filters, next/previous
+bounds, separate event notes, autosave, completion toggles, legacy IDs, character
+filters, reading progress, dates, Scripture versions, CSV export, custom notes,
+backup merging, repeat-import stability, unique HTML IDs, script references, and
+updated offline cache entries. Children's scripts and reading data were compared
+byte-for-byte with the earlier project.
+A visual browser check was unavailable because Chromium did not download successfully.
+
+The ZIP updates your source project. Your hosted website has not been changed.

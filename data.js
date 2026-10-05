@@ -339,7 +339,7 @@ const RHYTHM = [
   ['Sunday','Sunday school, then the worship service. Children have their own class, which is where much of the Sincere Milk material is reinforced.'],
   ['Monday','Bible study, worked through the Search the Scriptures manual across the whole church at the same time.'],
   ['Thursday','Revival service, with an emphasis on personal holiness and testimony.'],
-  ['Daily','Family altar at home, plus personal reading. Daily Manna and Higher Everyday for adults, Sincere Milk for the children.'],
+  ['Daily','Family altar at home, plus personal reading. Bible studies for husband and wife, Sincere Milk for the children.'],
   ['Weekly','House caring fellowship in the neighbourhood, and outreach or visitation.']
 ];
 

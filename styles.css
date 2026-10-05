@@ -249,3 +249,51 @@ nav button[aria-current="page"]{color:var(--rose)}
 #pracList h3:first-child{margin-top:0}
 #pracList .love .body p{margin-bottom:10px}
 #pracList .love .body p:last-of-type{margin-bottom:12px}
+
+/* Adult Bible library, using the existing home palette. */
+.view [hidden]{display:none !important}
+.library-links{display:grid;gap:9px}
+.library-link{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.55);padding:14px 12px}
+.library-link>span:nth-child(2){flex:1;min-width:0}
+.library-link b{display:block;font-family:var(--ff-d);font-size:18px;line-height:1.25}
+.library-link small{display:block;color:var(--ink-soft);font-size:12.5px;line-height:1.45;margin-top:4px}
+.library-icon{flex:0 0 35px;height:35px;display:grid;place-items:center;border-radius:50%;background:var(--blush);color:var(--rose-dark);font-family:var(--ff-d);font-weight:700}
+.library-nav{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 15px}
+.library-nav .btn.ghost{color:var(--ivory);border-color:rgba(245,238,229,.3)}
+.study-eyebrow{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--leaf);font-weight:700}
+.passage-title{font-family:var(--ff-d);font-size:19px;color:var(--rose-dark);margin:8px 0 12px}
+.study-block{border-top:1px solid var(--line);padding-top:16px;margin-top:18px}
+.study-block h3{margin:0 0 9px;font-size:18px}
+.study-block p{font-size:14.5px;line-height:1.65;margin-bottom:9px}
+.study-block ol{padding-left:23px;margin:8px 0}
+.study-block li{font-size:14.5px;line-height:1.6;margin-bottom:10px;padding-left:3px}
+.explained-points>li{padding:0 0 10px 5px;margin-bottom:15px;border-bottom:1px solid var(--line-2)}
+.explained-points>li::marker{color:var(--rose-dark);font-family:var(--ff-d);font-weight:700}
+.explained-points h3{font-size:17px;margin-bottom:5px}
+.verse-ref{display:inline-block;font-size:12.5px;margin-bottom:7px;color:var(--leaf);text-underline-offset:3px}
+.save-status{font-size:12.5px;line-height:1.5;margin:10px 0 0;color:var(--leaf);min-height:19px}
+.resource{border-top:1px solid var(--line);padding:12px 0}
+.resource summary{display:flex;gap:12px;align-items:center;list-style:none;cursor:pointer}
+.resource summary::-webkit-details-marker{display:none}
+.resource summary>span:nth-child(2){flex:1;min-width:0}
+.resource b{display:block;font-family:var(--ff-d);font-size:17px;line-height:1.3}
+.resource small{display:block;font-size:11.8px;margin-top:3px;color:var(--ink-soft)}
+.resource-spine{flex:0 0 43px;height:59px;border-radius:4px 8px 8px 4px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:11px;border-left:4px solid rgba(255,255,255,.25)}
+.resource-caret{font-size:22px;color:var(--rose-dark)}
+.resource[open] .resource-caret{transform:rotate(45deg)}
+.resource-body{padding:10px 0 0 55px;font-size:13.5px}
+#readingProgress{display:block;width:100%;height:11px;accent-color:var(--leaf);margin:10px 0 18px}
+.day-field{flex:1;margin:0;text-align:center}
+.day-field input{width:100%;text-align:center}
+.reading-passage .btn{margin-top:10px}
+.schedule-details summary{font-family:var(--ff-d);font-size:19px;font-weight:600;cursor:pointer;margin-bottom:12px}
+.schedule-scroll{max-height:430px;overflow:auto;margin-bottom:14px;border:1px solid var(--line);border-radius:10px}
+#readingSchedule{width:100%;margin:0}
+#readingSchedule caption{text-align:left;padding:12px;font-size:12px;color:var(--ink-soft)}
+#readingSchedule th{position:sticky;top:0;background:var(--panel-solid);z-index:1}
+#readingSchedule td{white-space:normal;overflow-wrap:anywhere}
+.schedule-day{background:transparent;border:0;color:var(--rose-dark);padding:4px;text-align:left;min-height:44px;white-space:nowrap;font-size:12px;font-weight:700}
+.schedule-day small{display:block;font-size:10.5px;font-weight:400;color:var(--ink-soft)}
+.card select{width:100%;min-width:0;text-overflow:ellipsis}
+@media(max-width:400px){.resource-body{padding-left:0}.study-block p,.study-block li{font-size:14px}.library-link b{font-size:17px}}
+@media print{.library-nav,#studyJournal,#characterJournal,#readingExport,#passageForm{display:none!important}.study-block{break-inside:avoid}.card{margin-bottom:18px}.schedule-scroll{max-height:none;overflow:visible}}
